@@ -1,0 +1,83 @@
+Важным функционалом почти любого 
+веб-приложения является регистрация пользователя (аутентификация) и выполнение пользователем 
+входа в систему (авторизация).
+
+function login(mode) {
+  if (mode === "account") {
+    loginWithPassword();
+  } else if (mode === "email") {
+    loginWithEmail();
+  } else if (mode === "mobile") {
+    loginWithMobile();
+  }
+}
+
+Иногда приложение может поддерживать другие методы аутентификации и авторизации, 
+например, в дополнение к электронной почте, 
+страница авторизации Medium поддерживает сторонних 
+провайдеров аутентификации, таких как Google, Facebook, Apple и Twitter.
+
+Для поддержки новых методов нам потребуется снова и снова изменять и дополнять функцию login:
+function login(mode) {
+  if (mode === "account") {
+    loginWithPassword();
+  } else if (mode === "email") {
+    loginWithEmail();
+  } else if (mode === "mobile") {
+    loginWithMobile();
+  } else if (mode === "google") {
+    loginWithGoogle();
+  } else if (mode === "facebook") {
+    loginWithFacebook();
+  } else if (mode === "apple") {
+    loginWithApple();
+  } else if (mode === "twitter") {
+    loginWithTwitter();
+  }
+}
+
+Со временем обнаружится, что эту функцию все труднее поддерживать. 
+Для решения данной проблемы можно применить паттерн "Стратегия", позволяющий 
+инкапсулировать различные методы авторизации в разных стратегиях.
+
+Кроме аутентификации и авторизации паттерн "Стратегия" можно использовать для валидации формы, 
+а также для оптимизации большого количества ветвей if else.
+
+Случаи использования паттерна "Стратегия":
+
+  когда необходим динамический выбор одного из нескольких доступных алгоритмов. 
+	Как правило, каждый алгоритм инкапсулируется в отдельной стратегии (классе);
+  когда имеется несколько классов, которые отличаются только поведением, 
+	и выбор конкретного поведения можно произвести динамически во время выполнения кода.
+
+Альтернативно это делается через объект
+const modes = {
+  account: loginWithPassword,
+  email: loginWithEmail,
+  mobile: loginWithMobile,
+  // ... и так до бесконечности
+}
+
+function login(mode) {
+  const method = modes[mode];
+  if (method) {
+    method();
+  } else {
+    throw new Error('Политика аутентификации не установлена!');
+  }
+}
+Или Map
+const modes = new Map();
+modes.set('account', loginWithPassword);
+modes.set('email', loginWithEmail);
+modes.set('mobile', loginWithMobile);
+// ... и так до бесконечности
+
+function login(mode) {
+	const method = modes.get(mode);
+	if (method) {
+		method();
+	} else {
+		throw new Error('Политика аутентификации не установлена!');
+	}
+}
