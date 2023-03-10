@@ -1,0 +1,13 @@
+{
+  "name": "leet",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Mayamee/leet.git",
+  "author": "Mayamee <ponyashcat228@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^18.15.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.5"
+  }
+}
