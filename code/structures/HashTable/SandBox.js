@@ -1,0 +1,17 @@
+let capitals = []
+
+capitals[881] = 'Вена'
+capitals[1237] = 'Берлин'
+capitals[1323] = 'Вильнюс'
+capitals[1614] = 'Тирана'
+capitals[1167] = 'Копенгаген'
+capitals[963] = 'Люксембург'
+capitals[1067] = 'Минск'
+capitals[1191] = 'Дублин'
+capitals[1275] = 'Амстердам'
+capitals[752] = 'Ватикан'
+capitals[1786] = 'Рейкьявик'
+capitals[1200] = 'Варшава'
+capitals[1872] = 'Будапешт'
+capitals[856] = 'Мадрид'
+capitals[1147] = 'Москва'
