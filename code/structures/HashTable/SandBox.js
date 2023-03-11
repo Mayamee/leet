@@ -1,17 +1,39 @@
-let capitals = []
+class TableInDistributionArray {
+  list = []
+  set(key, value) {
+    this.list[key] = value
+  }
+  get(key) {
+    return this.list[key]
+  }
+}
 
-capitals[881] = 'Вена'
-capitals[1237] = 'Берлин'
-capitals[1323] = 'Вильнюс'
-capitals[1614] = 'Тирана'
-capitals[1167] = 'Копенгаген'
-capitals[963] = 'Люксембург'
-capitals[1067] = 'Минск'
-capitals[1191] = 'Дублин'
-capitals[1275] = 'Амстердам'
-capitals[752] = 'Ватикан'
-capitals[1786] = 'Рейкьявик'
-capitals[1200] = 'Варшава'
-capitals[1872] = 'Будапешт'
-capitals[856] = 'Мадрид'
-capitals[1147] = 'Москва'
+class CompressedDistributionTable {
+  list = []
+  compressIndex = 20
+  recalculateIndex(newIndex) {
+    // compressindex - старый индекс сжатия массива
+    // newIndex - новый индекс сжатия массива
+    const newList = []
+    const transformCoefficient = this.compressIndex / newIndex
+		// коефициент трансформации индекса при изменении индекса сжатия массива
+    for (let i = 0; i < this.list.length; i += 1) {
+      newList[Math.floor(i * transformCoefficient)] = this.list[i]
+    }
+    this.list = newList
+    this.compressIndex = newIndex
+  }
+  setCompressIndex(index) {
+    if (this.list.length === 0) {
+      this.compressIndex = index
+      return
+    }
+    this.recalculateIndex(index)
+  }
+  set(key, value) {
+    this.list[Math.floor(key / this.compressIndex)] = value
+  }
+  get(key) {
+    return this.list[Math.floor(key / this.compressIndex)]
+  }
+}
