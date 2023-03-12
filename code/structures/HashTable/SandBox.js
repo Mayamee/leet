@@ -1,3 +1,4 @@
+import { LinkedList } from './LinkedList'
 class TableInDistributionArray {
   list = []
   set(key, value) {
@@ -16,7 +17,7 @@ class CompressedDistributionTable {
     // newIndex - новый индекс сжатия массива
     const newList = []
     const transformCoefficient = this.compressIndex / newIndex
-		// коефициент трансформации индекса при изменении индекса сжатия массива
+    // коефициент трансформации индекса при изменении индекса сжатия массива
     for (let i = 0; i < this.list.length; i += 1) {
       newList[Math.floor(i * transformCoefficient)] = this.list[i]
     }
@@ -35,5 +36,28 @@ class CompressedDistributionTable {
   }
   get(key) {
     return this.list[Math.floor(key / this.compressIndex)]
+  }
+}
+class FixedTable {
+  list = new Array(100)
+  setElement = (key, value) => {
+    let index = key % this.list.length
+    if (typeof this.list[index] === 'undefined') {
+      this.list[index] = new LinkedList()
+    }
+    this.list[index].append({ key, value })
+  }
+  getElement = (key) => {
+    let index = key % this.list.length
+    if (typeof this.list[index] === undefined) {
+      return undefined
+    }
+    const acc = new LinkedList()
+    for (const pair of this.list[index].getIterator()) {
+      if (pair.key === key) {
+        acc.append(pair.value)
+      }
+    }
+    return acc.toArray()
   }
 }
