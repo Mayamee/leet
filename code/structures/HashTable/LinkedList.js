@@ -98,7 +98,17 @@ export class LinkedList {
   isEmpty() {
     return this.head === undefined && this.tail === undefined
   }
-
+  getIterator() {
+    return {
+      current: this.head,
+      [Symbol.iterator]: function* () {
+        while (this.current !== null) {
+          yield this.current.value
+          this.current = this.current.next
+        }
+      },
+    }
+  }
   toArray() {
     const result = []
 
