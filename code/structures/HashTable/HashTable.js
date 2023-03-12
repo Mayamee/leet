@@ -1,5 +1,5 @@
 import { LinkedList } from './utils/LinkedList'
-export default class Hash {
+export class Hash {
   constructor() {
     this.table = []
     this.count = 0
@@ -64,7 +64,7 @@ export default class Hash {
       return undefined
     }
 
-    for (const pair of this.table[index]) {
+    for (const pair of this.table[index].getIterator()) {
       if (pair.key === key) {
         return pair.value
       }
