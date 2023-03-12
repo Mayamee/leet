@@ -1,3 +1,4 @@
+import { LinkedList } from './utils/LinkedList'
 export default class Hash {
   constructor() {
     this.table = []
