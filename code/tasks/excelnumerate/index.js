@@ -22,7 +22,7 @@ const solution2 = (num) => {
     .map((n) => String.fromCharCode(64 + n))
     .join('')
 }
-const testdata = [11123, 1123, 345, 4567, 523]
+const testdata = [11123, 1123, 345, 4567, 523, 5070]
 
 for (const data of testdata) {
 	console.log(solution(data))
